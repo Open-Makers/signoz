@@ -9,10 +9,14 @@ jobs:
   docker-compose:
     runs-on: self-hosted
     steps:
+      - name:
+          run: |
+            sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/*
+      - uses: actions/checkout@v4
       - name: Docker Compose Down
         run: |
           cd deploy && docker compose -f docker/clickhouse-setup/docker-compose.yaml down
-      - uses: actions/checkout@v4
+
       - name: docker-compose up
         run: |
          cd deploy && docker compose -p popgunservers -f docker/clickhouse-setup/docker-compose.yaml  up -d
