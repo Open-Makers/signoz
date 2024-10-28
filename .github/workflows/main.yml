@@ -1,0 +1,34 @@
+name: actions-pipeline
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+  workflow_dispatch:
+jobs:
+  docker-compose:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker Compose Down
+        run: |
+          cd deploy && docker compose down -f docker/clickhouse-setup/docker-compose.yaml
+      - name: docker-compose up
+        run: |
+         cd deploy && docker compose -p popgunservers -f docker/clickhouse-setup/docker-compose.yaml  up -d
+      - name: Notify Discord on Success
+        if: ${{ success() }}
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_SUCCESSFUL_BUILDS_WEBHOOK_URL }}
+          content: |
+            SUCCESSFUL build for repository ${{ github.repository }}!
+            [View build details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+      - name: Notify Discord on Failure
+        if: ${{ failure() }}
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_FAILED_BUILDS_WEBHOOK_URL}}
+          content: |
+            FAILED build for repository ${{ github.repository }}!
+            [View build details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
