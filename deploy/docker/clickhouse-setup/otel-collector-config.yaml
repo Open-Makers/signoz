@@ -56,6 +56,9 @@ receivers:
               - localhost:8888
             labels:
               job_name: otel-collector
+  filelog:
+    include: [ /tmp/popgunservers.log ]
+    start_at: end
 
 
 processors:
@@ -183,6 +186,6 @@ service:
       processors: [batch]
       exporters: [clickhousemetricswrite/prometheus]
     logs:
-      receivers: [otlp, tcplog/docker]
+      receivers: [otlp, tcplog/docker, filelog]
       processors: [batch]
       exporters: [clickhouselogsexporter]

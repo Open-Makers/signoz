@@ -260,6 +260,7 @@ services:
       - ./otel-collector-opamp-config.yaml:/etc/manager-config.yaml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /:/hostfs:ro
+      - /home/ghrunner/actions-runner/_work/pukawka-backend/pukawka-backend/log:/tmp/log
     environment:
       - OTEL_RESOURCE_ATTRIBUTES=host.name=signoz-host,os.type=linux
       - LOW_CARDINAL_EXCEPTION_GROUPING=false
