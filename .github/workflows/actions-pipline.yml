@@ -1,9 +1,11 @@
 name: actions-pipeline
 on:
   push:
-    branches: [ "develop" ]
+    branches:
+        - develop
   pull_request:
-    branches: [ "develop" ]
+    branches:
+        - develop
   workflow_dispatch:
 jobs:
   docker-compose:
@@ -16,11 +18,11 @@ jobs:
 
       - name: docker-compose down
         run: |
-          docker compose -f deploy/docker/clickhouse-setup/docker-compose.yaml down -v 
+          make down-signoz 
 
       - name: docker-compose up
         run: |
-          docker compose -f deploy/docker/clickhouse-setup/docker-compose.yaml  up -d
+          make run-signoz
 
       - name: Notify Discord on Success
         if: ${{ success() }}

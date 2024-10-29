@@ -160,7 +160,7 @@ run-testing:
 	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.testing.yaml up --build -d
 
 down-signoz:
-	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml down
+	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml down -v
 
 clear-standalone-data:
 	@docker run --rm -v "$(PWD)/$(STANDALONE_DIRECTORY)/data:/pwd" busybox \
