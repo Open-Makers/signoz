@@ -16,7 +16,7 @@ jobs:
 
       - name: docker-compose down
         run: |
-          cd docker compose -p popgunservers -f deploy/docker/clickhouse-setup/docker-compose.yaml  down -v
+          cd docker compose -p popgunservers -f deploy/docker/clickhouse-setup/docker-compose.yaml  down 
 
       - name: docker-compose up
         run: |

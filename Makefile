@@ -141,26 +141,26 @@ dev-setup:
 	@echo "------------------"
 
 run-local:
-	@docker-compose -f \
+	docker compose -f \
 	$(STANDALONE_DIRECTORY)/docker-compose-core.yaml -f $(STANDALONE_DIRECTORY)/docker-compose-local.yaml \
 	up --build -d
 
 down-local:
-	@docker-compose -f \
+	docker compose -f \
 	$(STANDALONE_DIRECTORY)/docker-compose-core.yaml -f $(STANDALONE_DIRECTORY)/docker-compose-local.yaml \
 	down -v
 
 pull-signoz:
-	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml pull
+	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml pull
 
 run-signoz:
-	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml up -d
+	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml up -d
 
 run-testing:
-	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.testing.yaml up --build -d
+	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.testing.yaml up --build -d
 
 down-signoz:
-	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml down -v
+	docker compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml down
 
 clear-standalone-data:
 	@docker run --rm -v "$(PWD)/$(STANDALONE_DIRECTORY)/data:/pwd" busybox \
