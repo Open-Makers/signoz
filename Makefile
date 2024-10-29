@@ -189,3 +189,16 @@ check-no-ee-references:
 
 test:
 	go test ./pkg/query-service/...
+
+.PHONY: stop-signoz start-signoz rm-signoz
+stop-signoz:
+	docker stop $(docker ps -a -q --filter="name=signoz" )
+
+start-signoz:
+	docker start $(docker ps -a -q --filter="name=signoz" )
+
+rm-signoz:
+	docker rm $(docker ps -a -q --filter="name=signoz" )
+
+
+
