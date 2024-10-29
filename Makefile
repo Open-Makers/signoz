@@ -154,7 +154,7 @@ pull-signoz:
 	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml pull
 
 run-signoz:
-	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml up --build -d
+	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.yaml up -d
 
 run-testing:
 	@docker-compose -f $(STANDALONE_DIRECTORY)/docker-compose.testing.yaml up --build -d

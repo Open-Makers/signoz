@@ -13,10 +13,14 @@ jobs:
         run: |
           sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/*
       - uses: actions/checkout@v4
+
+      - name: docker-compose down
+        run: |
+          cd docker compose -p popgunservers -f deploy/docker/clickhouse-setup/docker-compose.yaml  down -v
+
       - name: docker-compose up
         run: |
-          cd deploy && docker compose -p popgunservers -f docker/clickhouse-setup/docker-compose.yaml  up -d
-        continue-on-error: true
+          cd docker compose -p popgunservers -f deploy/docker/clickhouse-setup/docker-compose.yaml  up -d
 
       - name: Notify Discord on Success
         if: ${{ success() }}
