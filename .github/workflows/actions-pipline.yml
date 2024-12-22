@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: clean up
         run: |
-          sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/*
+          sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/.git
 
       - uses: actions/checkout@v4
 
