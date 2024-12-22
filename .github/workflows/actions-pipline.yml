@@ -1,4 +1,4 @@
-name: actions-pipeline
+name: signoz-docker-compose
 on:
   push:
     branches:
@@ -11,9 +11,10 @@ jobs:
   docker-compose:
     runs-on: [self-hosted, pukawka-new]
     steps:
-#      - name: clean up
-#        run: |
-#          sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/*
+      - name: clean up
+        run: |
+          sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/*
+
       - uses: actions/checkout@v4
 
       - name: docker-compose down
