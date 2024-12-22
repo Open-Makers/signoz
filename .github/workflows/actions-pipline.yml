@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
 jobs:
   docker-compose:
-    runs-on: self-hosted
+    runs-on: [self-hosted, pukawka-new]
     steps:
-      - name:
+      - name: clean up
         run: |
           sudo rm -rf /home/ghrunner/actions-runner/_work/signoz/signoz/*
       - uses: actions/checkout@v4
